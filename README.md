@@ -1,1 +1,1 @@
-Victor Palmeira Novais
+Developer: Victor Palmeira Novais 
