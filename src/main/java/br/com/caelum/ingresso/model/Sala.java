@@ -1,10 +1,20 @@
 package br.com.caelum.ingresso.model;
 
-import org.hibernate.validator.constraints.NotBlank;
-
-import javax.persistence.*;
-import java.util.*;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
+
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
 
 /**
  * Created by nando on 03/03/17.
@@ -16,13 +26,23 @@ public class Sala {
     @GeneratedValue
     private Integer id;
 
-    @NotBlank
+    @NotNull
     private String nome;
 
     @OneToMany(fetch = FetchType.EAGER)
     private List<Lugar> lugares = new ArrayList<>();
+    
+    @NotNull
+    private BigDecimal preco;
+    
+    
 
-    /**
+    public Sala(String nome, BigDecimal preco) {
+		this.nome = nome;
+		this.preco = preco;
+	}
+
+	/**
      * @deprecated hibernate only
      */
     public Sala() {
@@ -61,8 +81,16 @@ public class Sala {
     public void setLugares(List<Lugar> lugares) {
         this.lugares = lugares;
     }
+    
+    public BigDecimal getPreco() {
+		return preco;
+	}
 
-    public Map<String, List<Lugar>> getMapaDeLugares() {
+    public void setPreco(BigDecimal preco) {
+		this.preco = preco;
+	}
+
+	public Map<String, List<Lugar>> getMapaDeLugares() {
         if(!this.lugares.isEmpty()){
             return this.lugares.stream().collect(Collectors.groupingBy(Lugar::getFileira,Collectors.toList()));
         }
