@@ -62,6 +62,8 @@ public class SessaoForm {
 		Filme filme = filmeDao.findOne(filmeId);
 		Sala sala = saslDao.findOne(salaId);
 		
+		System.out.println(this.horario);
+		
 		Sessao sessao = new Sessao(this.horario,filme, sala);
 		
 		return sessao;
