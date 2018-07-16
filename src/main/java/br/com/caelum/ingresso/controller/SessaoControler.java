@@ -19,6 +19,7 @@ import br.com.caelum.ingresso.dao.FilmeDao;
 import br.com.caelum.ingresso.dao.SalaDao;
 import br.com.caelum.ingresso.dao.SessaoDao;
 import br.com.caelum.ingresso.desconto.TipoDeIngresso;
+import br.com.caelum.ingresso.model.Carrinho;
 import br.com.caelum.ingresso.model.Sessao;
 import br.com.caelum.ingresso.model.form.SessaoForm;
 import br.com.caelum.ingresso.rest.ImagemCapa;
@@ -29,6 +30,9 @@ import br.com.caelum.ingresso.validacao.GerenciadorDeSessao;
 public class SessaoControler {
 
 	@Autowired
+	private Carrinho carrinho;
+
+	@Autowired
 	private FilmeDao filmeDao;
 
 	@Autowired
@@ -36,7 +40,7 @@ public class SessaoControler {
 
 	@Autowired
 	private SessaoDao sessaoDao;
-	
+
 	@Autowired
 	private imdbClient client;
 
@@ -84,12 +88,12 @@ public class SessaoControler {
 		ModelAndView mv = new ModelAndView("sessao/lugares");
 
 		Sessao sessao = sessaoDao.findOne(SessaoId);
-		
-	    Optional<ImagemCapa> imagemCapa = client.request(sessao.getFilme(), ImagemCapa.class);
-		
+
+		Optional<ImagemCapa> imagemCapa = client.request(sessao.getFilme(), ImagemCapa.class);
+
 		mv.addObject("sessao", sessao);
-		mv.addObject("imagemCapa",imagemCapa.orElse(new ImagemCapa()));
-		mv.addObject("tiposDeIngressos",TipoDeIngresso.values());
+		mv.addObject("imagemCapa", imagemCapa.orElse(new ImagemCapa()));
+		mv.addObject("tiposDeIngressos", TipoDeIngresso.values());
 
 		return mv;
 	}
