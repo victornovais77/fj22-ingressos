@@ -102,7 +102,7 @@ public class FilmeController {
 
 		Filme filme = filmeDao.findOne(id);
 
-		List<Sessao> sessoes = sessaoDao.buscarSessoesDoFilme(filme);
+		List<Sessao> sessoes = sessaoDao.buscaSessoesDoFilme(filme);
 		
 		Optional<DetalhesDoFilme> detalhesoFilme = client.request(filme,DetalhesDoFilme.class);
 		

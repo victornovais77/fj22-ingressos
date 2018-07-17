@@ -16,9 +16,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
-/**
- * Created by nando on 03/03/17.
- */
 @Entity
 public class Sala {
 

@@ -21,12 +21,12 @@ public class SessaoDao {
 		manager.persist(sessao);
 	}
 
-	public List<Sessao> buscarSessoesDaSala(Sala sala) {
+	public List<Sessao> buscaSessoesDaSala(Sala sala) {
 		return manager.createQuery("select s from Sessao s where s.sala = :sala", Sessao.class)
 				             .setParameter("sala", sala).getResultList();
 	}
 	
-	public List<Sessao> buscarSessoesDoFilme(Filme filme) {
+	public List<Sessao> buscaSessoesDoFilme(Filme filme) {
 		return manager.createQuery("select f from Sessao f where f.filme = :filme", Sessao.class)
 				             .setParameter("filme", filme).getResultList();
 	}

@@ -19,7 +19,6 @@ import br.com.caelum.ingresso.dao.FilmeDao;
 import br.com.caelum.ingresso.dao.SalaDao;
 import br.com.caelum.ingresso.dao.SessaoDao;
 import br.com.caelum.ingresso.desconto.TipoDeIngresso;
-import br.com.caelum.ingresso.model.Carrinho;
 import br.com.caelum.ingresso.model.Sessao;
 import br.com.caelum.ingresso.model.form.SessaoForm;
 import br.com.caelum.ingresso.rest.ImagemCapa;
@@ -28,9 +27,6 @@ import br.com.caelum.ingresso.validacao.GerenciadorDeSessao;
 
 @Controller
 public class SessaoControler {
-
-	@Autowired
-	private Carrinho carrinho;
 
 	@Autowired
 	private FilmeDao filmeDao;
@@ -46,8 +42,11 @@ public class SessaoControler {
 
 	@GetMapping("/admin/sessao")
 	public ModelAndView form(@RequestParam("salaId") int salaId, SessaoForm form) {
+		
+		form.setSalaId(salaId);
+		
 		ModelAndView mv = new ModelAndView("sessao/sessao");
-
+      
 		mv.addObject("sala", salaDao.findOne(salaId));
 		mv.addObject("filmes", filmeDao.findAll());
 		mv.addObject("form", form);
@@ -68,7 +67,7 @@ public class SessaoControler {
 
 		Sessao sessao = form.toSessao(salaDao, filmeDao);
 
-		List<Sessao> sessaoDaSala = sessaoDao.buscarSessoesDaSala(sessao.getSala());
+		List<Sessao> sessaoDaSala = sessaoDao.buscaSessoesDaSala(sessao.getSala());
 
 		GerenciadorDeSessao gerenciador = new GerenciadorDeSessao(sessaoDaSala);
 

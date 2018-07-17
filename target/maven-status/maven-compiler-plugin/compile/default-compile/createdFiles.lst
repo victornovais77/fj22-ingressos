@@ -1,11 +1,14 @@
 br\com\caelum\ingresso\desconto\DescontoParaEstuante.class
 br\com\caelum\ingresso\model\Lugar.class
 br\com\caelum\ingresso\controller\SalaController.class
+br\com\caelum\ingresso\dao\CompraDao.class
 br\com\caelum\ingresso\model\Sessao.class
+br\com\caelum\ingresso\converter\YearMonthConverter.class
 br\com\caelum\ingresso\model\form\CarrinhoForm.class
 br\com\caelum\ingresso\controller\LugarController.class
 br\com\caelum\ingresso\model\Filme.class
 br\com\caelum\ingresso\controller\SessaoControler.class
+br\com\caelum\ingresso\model\Compra.class
 br\com\caelum\ingresso\controller\HomeController.class
 br\com\caelum\ingresso\model\Carrinho.class
 br\com\caelum\ingresso\dao\FilmeDao.class
@@ -19,6 +22,7 @@ br\com\caelum\ingresso\desconto\DescontoParaBancos.class
 br\com\caelum\ingresso\desconto\DescontoParaEstudante.class
 br\com\caelum\ingresso\validacao\GerenciadorDeSessao.class
 br\com\caelum\ingresso\rest\DetalhesDoFilme.class
+br\com\caelum\ingresso\model\Cartao.class
 br\com\caelum\ingresso\desconto\Desconto.class
 br\com\caelum\ingresso\dao\LugarDao.class
 br\com\caelum\ingresso\desconto\SemDesconto.class

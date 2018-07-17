@@ -13,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Sessao {
@@ -21,6 +22,7 @@ public class Sessao {
 	@GeneratedValue
 	private Integer id;
 
+	@NotNull
 	private LocalTime horario;
 
 	@ManyToOne
@@ -29,6 +31,7 @@ public class Sessao {
 	@ManyToOne
 	private Filme filme;
 	
+	@NotNull
 	private BigDecimal preco;
 	
 	@OneToMany(mappedBy="sessao", fetch = FetchType.EAGER)
@@ -88,10 +91,6 @@ public class Sessao {
 
 	public void setPreco(BigDecimal preco) {
 		this.preco = preco;
-	}
-	
-	public Map<String, List<Lugar>> getMapaDeLugares(){
-		return sala.getMapaDeLugares();
 	}
 	
 	public boolean isDisponivel(Lugar lugarSelecionado){
