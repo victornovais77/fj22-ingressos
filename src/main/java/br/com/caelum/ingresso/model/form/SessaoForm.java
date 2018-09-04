@@ -1,10 +1,9 @@
 package br.com.caelum.ingresso.model.form;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalTime;
-
-import javax.validation.constraints.NotNull;
-
-import org.springframework.format.annotation.DateTimeFormat;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 import br.com.caelum.ingresso.dao.FilmeDao;
 import br.com.caelum.ingresso.dao.SalaDao;
@@ -15,15 +14,15 @@ import br.com.caelum.ingresso.model.Sessao;
 public class SessaoForm {
 
 	private Integer id;
+	 
 
-	@NotNull
 	private Integer salaId;
+    
+ 
 
-	@DateTimeFormat(pattern = "HH:mm")
-	private LocalTime horario;
-
-	@NotNull
-	private Integer filmeId;
+    private String horario;
+    
+    private Integer filmeId;
 
 	public Integer getId() {
 		return id;
@@ -41,11 +40,11 @@ public class SessaoForm {
 		this.salaId = salaId;
 	}
 
-	public LocalTime getHorario() {
+	public String getHorario() {
 		return horario;
 	}
 
-	public void setHorario(LocalTime horario) {
+	public void setHorario(String horario) {
 		this.horario = horario;
 	}
 
@@ -56,19 +55,23 @@ public class SessaoForm {
 	public void setFilmeId(Integer filmeId) {
 		this.filmeId = filmeId;
 	}
-
-	public Sessao toSessao(SalaDao saslDao, FilmeDao filmeDao) {
-		
-		Filme filme = filmeDao.findOne(filmeId);
-		Sala sala = saslDao.findOne(salaId);
-		
-		System.out.println(this.horario);
-		
-		Sessao sessao = new Sessao(this.horario,filme, sala);
-		
-		return sessao;
-
-	}
-
-
+    
+    public Sessao toSessao(SalaDao salaDao,FilmeDao filmeDao) {
+    	
+    	Filme filme = filmeDao.findOne(filmeId);
+    	Sala sala = salaDao.findOne(salaId);
+    	
+   
+    	 
+    	 DateTimeFormatter formatador = DateTimeFormatter.ofPattern("HH:mm");
+    	 
+    	 LocalTime localDate = LocalTime.parse(horario, formatador);
+    	
+    	Sessao sessao = new Sessao(localDate,filme,sala);
+    	sessao.setId(id);
+    	
+    	return sessao;
+    }
 }
+
+

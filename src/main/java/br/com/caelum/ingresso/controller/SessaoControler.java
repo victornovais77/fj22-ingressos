@@ -59,6 +59,7 @@ public class SessaoControler {
 	public ModelAndView salva(@Valid SessaoForm form, BindingResult result) {
 
 		System.out.println("Horario do form: " + form.getHorario());
+		System.out.println("Sala do form: " + form.getSalaId());
 
 		if (result.hasErrors()) {
 
